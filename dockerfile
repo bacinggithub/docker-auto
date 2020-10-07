@@ -1,4 +1,13 @@
-FROM nginx:1.15.8-alpine
-LABEL version="1.1.0"
-ENV REFRESHED_AT=2019-12-02-1
-COPY index.html /usr/share/nginx/html/index.html
+FROM golang:1.10.5-alpine3.8
+
+ 
+
+WORKDIR /go/src/app
+
+COPY maingo.go .
+
+RUN go build -o main .
+
+EXPOSE 8000
+
+CMD [“./main”]
